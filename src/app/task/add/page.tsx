@@ -1,3 +1,4 @@
+import TaskForm from "../../components/TaskForm";
 export default function AddTask() {
-  return <h1>AddTask</h1>;
+  return <TaskForm label="Add a new Task" />;
 }
