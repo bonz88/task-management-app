@@ -1,11 +1,11 @@
-export const BackIcon = () => {
-  const iconStyle = {
-    transform: "scale(0.7)",
-    transformOrigin: "center center",
-  };
+type PlusIconProps = {
+  className?: string;
+};
+
+export const PlusIcon = ({ className }: PlusIconProps) => {
   return (
     <svg
-      className="w-[36px] h-[36px]"
+      className={className}
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -13,17 +13,15 @@ export const BackIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        style={iconStyle}
-        d="M19 12H5"
-        stroke="#25282B"
+        d="M12 5V19"
+        stroke="white"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        style={iconStyle}
-        d="M12 19L5 12L12 5"
-        stroke="#25282B"
+        d="M5 12H19"
+        stroke="white"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

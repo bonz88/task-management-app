@@ -9,7 +9,7 @@ export default function TaskInput({ onValueChange, value }: TaskInputProps) {
       <span className="text-lg">Task Name</span>
       <input
         onChange={(e) => onValueChange(e.target.value)}
-        className="w-[398px] h-[60px] p-4 rounded-full border-none focus:outline-none focus:ring-0"
+        className="w-[398px] h-10 p-4 rounded-full border-none focus:outline-none focus:ring-0"
         value={value}
       />
     </div>

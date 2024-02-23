@@ -5,6 +5,8 @@ import TaskInput from "./TaskInput";
 import TaskLevels from "./TaskLevels";
 import { BackIcon } from "../icons/BackIcon";
 import TaskDueDateTime from "./TaskDueDateTime";
+import { ITask, ISubtask, ITag } from "../types/types";
+import TaskSubtasks from "./TaskSubtasks";
 
 export default function TaskForm({ label }: { label: string }) {
   const [value, setValue] = useState<string>("");
@@ -12,6 +14,7 @@ export default function TaskForm({ label }: { label: string }) {
   const [complexity, setComplexity] = useState<number>(0);
   const [dueDate, setDueDate] = useState<string>("");
   const [dueTime, setDueTime] = useState<string>("");
+  const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
   const [taskNameError, setTaskNameError] = useState<string>("");
 
   const handlePriority = (level: number) => {
@@ -32,6 +35,10 @@ export default function TaskForm({ label }: { label: string }) {
     setDueTime(time);
   };
 
+  const handleSubtasks = (value: string) => {
+    console.log(value);
+  };
+
   console.log("priority: ", priority);
   console.log("complexity", complexity);
   return (
@@ -45,7 +52,7 @@ export default function TaskForm({ label }: { label: string }) {
           </Link>
           <span className="text-2xl font-medium leading-[29px]">{label}</span>
         </div>
-        <div className="mt-4 flex flex-col gap-1">
+        <div className="mt-[30px] flex flex-col gap-1">
           <TaskInput onValueChange={(value) => setValue(value)} value={value} />
         </div>
         <div className="mt-1">
@@ -66,6 +73,9 @@ export default function TaskForm({ label }: { label: string }) {
             handleDueDate={handleDueDate}
             handleDueTime={handleDueTime}
           />
+        </div>
+        <div className="mt-[30px]">
+          <TaskSubtasks handleSubtasks={handleSubtasks} />
         </div>
       </div>
     </div>
