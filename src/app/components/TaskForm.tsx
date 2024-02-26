@@ -7,6 +7,7 @@ import { BackIcon } from "../icons/BackIcon";
 import TaskDueDateTime from "./TaskDueDateTime";
 import { ITask, ISubtask, ITag } from "../types/types";
 import TaskSubtasks from "./TaskSubtasks";
+import TaskSubtasksList from "./TaskSubtasksList";
 
 export default function TaskForm({ label }: { label: string }) {
   const [value, setValue] = useState<string>("");
@@ -36,14 +37,36 @@ export default function TaskForm({ label }: { label: string }) {
   };
 
   const handleSubtasks = (value: string) => {
-    console.log(value);
+    const subtask: ISubtask = {
+      id: Math.random().toString(),
+      value: value,
+      isCompleted: false,
+    };
+    setSubtasks([...subtasks, subtask]);
   };
 
-  console.log("priority: ", priority);
-  console.log("complexity", complexity);
+  const handleDeleteSubtask = (id: string) => {
+    const newSubtask = subtasks.filter((subtask) => subtask.id !== id);
+    setSubtasks(newSubtask);
+  };
+
+  const handleEditSubtask = (value: string, id: string) => {
+    const newSubtask = subtasks.map((subtask) => {
+      if (subtask.id === id) {
+        return {
+          ...subtask,
+          value,
+        };
+      }
+      return subtask;
+    });
+    setSubtasks(newSubtask);
+  };
+
+  console.log(subtasks);
   return (
     <div className="mt-16 flex flex-col items-center">
-      <div className="w-[398px]">
+      <div className="w-[358px]">
         <div className="flex items-center gap-[73px]">
           <Link href="/">
             <button className="bg-white rounded-full p-1 border-none focus:outline-none focus:ring-0">
@@ -76,6 +99,16 @@ export default function TaskForm({ label }: { label: string }) {
         </div>
         <div className="mt-[30px]">
           <TaskSubtasks handleSubtasks={handleSubtasks} />
+        </div>
+        <div>
+          {subtasks.map((subtask) => (
+            <TaskSubtasksList
+              key={subtask.id}
+              subtask={subtask}
+              handleDeleteSubtask={handleDeleteSubtask}
+              handleEditSubtask={handleEditSubtask}
+            />
+          ))}
         </div>
       </div>
     </div>
