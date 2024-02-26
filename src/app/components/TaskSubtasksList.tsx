@@ -22,6 +22,10 @@ export default function TaskSubtasksList({
     e.preventDefault();
     handleEditSubtask(editedValue, id);
   };
+
+  const handleBlur = () => {
+    handleEditSubtask(editedValue, subtask.id);
+  };
   return (
     <div className="relative rounded-full shadow-sm mt-1">
       <form onSubmit={(e) => handleSubmitEdit(e, subtask.id)}>
@@ -29,6 +33,7 @@ export default function TaskSubtasksList({
           className="w-full pl-4 pr-12 py-2 rounded-full focus:outline-none"
           onChange={(e) => setEditedValue(e.target.value)}
           value={editedValue}
+          onBlur={handleBlur}
         />
         <button
           type="button"
