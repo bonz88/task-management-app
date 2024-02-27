@@ -8,6 +8,11 @@ import TaskDueDateTime from "./TaskDueDateTime";
 import { ITask, ISubtask, ITag } from "../types/types";
 import TaskSubtasks from "./TaskSubtasks";
 import TaskSubtasksList from "./TaskSubtasksList";
+import TaskTags from "./TaskTags";
+import TaskTagsList from "./TaskTagsList";
+import TaskItemAdder from "./TaskItemAdder"; // Adjust the path as necessary
+import TaskItemList from "./TaskItemList"; // Adjust the path as necessary
+import { useItems } from "../hooks/useItems"; // Custom hook for managing items
 
 export default function TaskForm({ label }: { label: string }) {
   const [value, setValue] = useState<string>("");
@@ -15,8 +20,21 @@ export default function TaskForm({ label }: { label: string }) {
   const [complexity, setComplexity] = useState<number>(0);
   const [dueDate, setDueDate] = useState<string>("");
   const [dueTime, setDueTime] = useState<string>("");
-  const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
+  //const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
+  //const [tags, setTags] = useState<ITag[]>([]);
   const [taskNameError, setTaskNameError] = useState<string>("");
+  const {
+    items: subtasks,
+    addItem: addSubtask,
+    deleteItem: deleteSubtask,
+    editItem: editSubtask,
+  } = useItems<ISubtask>();
+  const {
+    items: tags,
+    addItem: addTag,
+    deleteItem: deleteTag,
+    editItem: editTag,
+  } = useItems<ITag>();
 
   const handlePriority = (level: number) => {
     setPriority(level);
@@ -36,7 +54,7 @@ export default function TaskForm({ label }: { label: string }) {
     setDueTime(time);
   };
 
-  const handleSubtasks = (value: string) => {
+  /*   const handleSubtasks = (value: string) => {
     const subtask: ISubtask = {
       id: Math.random().toString(),
       value: value,
@@ -63,7 +81,34 @@ export default function TaskForm({ label }: { label: string }) {
     setSubtasks(newSubtask);
   };
 
-  console.log(subtasks);
+  const handleTags = (value: string) => {
+    const tag: ITag = {
+      id: Math.random().toString(),
+      value: value,
+    };
+    setTags([...tags, tag]);
+  };
+
+  const handleDeleteTag = (id: string) => {
+    const newTag = tags.filter((tag) => tag.id !== id);
+    setTags(newTag);
+  };
+
+  const handleEditTag = (value: string, id: string) => {
+    const newTag = tags.map((tag) => {
+      if (tag.id === id) {
+        return {
+          ...tag,
+          value,
+        };
+      }
+      return tag;
+    });
+    setTags(newTag);
+  }; */
+
+  console.log("subtasks: ", subtasks);
+  console.log("tags: ", tags);
   return (
     <div className="mt-16 flex flex-col items-center">
       <div className="w-[358px]">
@@ -97,16 +142,52 @@ export default function TaskForm({ label }: { label: string }) {
             handleDueTime={handleDueTime}
           />
         </div>
-        <div className="mt-[30px]">
+        {/*  <div className="mt-[30px]">
           <TaskSubtasks handleSubtasks={handleSubtasks} />
-        </div>
-        <div>
+        </div> */}
+        {/*  <div>
           {subtasks.map((subtask) => (
             <TaskSubtasksList
               key={subtask.id}
               subtask={subtask}
               handleDeleteSubtask={handleDeleteSubtask}
               handleEditSubtask={handleEditSubtask}
+            />
+          ))}
+        </div> */}
+        {/* <div className="mt-[30px]">
+          <TaskTags handleTags={handleTags} />
+        </div> */}
+        {/* <div>
+          {tags.map((tag) => (
+            <TaskTagsList
+              key={tag.id}
+              tag={tag}
+              handleDeleteTag={handleDeleteTag}
+              handleEditTag={handleEditTag}
+            />
+          ))}
+        </div> */}
+        <div className="mt-[30px]">
+          <TaskItemAdder onAdd={addSubtask} placeholder="Add new subtask" />
+          {subtasks.map((subtask) => (
+            <TaskItemList
+              key={subtask.id}
+              item={subtask}
+              onDelete={deleteSubtask}
+              onEdit={editSubtask}
+            />
+          ))}
+        </div>
+
+        <div className="mt-[30px]">
+          <TaskItemAdder onAdd={addTag} placeholder="Add new tag" />
+          {tags.map((tag) => (
+            <TaskItemList
+              key={tag.id}
+              item={tag}
+              onDelete={deleteTag}
+              onEdit={editTag}
             />
           ))}
         </div>

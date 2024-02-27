@@ -20,3 +20,9 @@ export type ITag = {
   id: string;
   value: string;
 };
+
+export type IItem = {
+  id: string;
+  value: string;
+  isCompleted?: boolean;
+};
