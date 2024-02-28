@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useItems } from "../hooks/useItems";
 import { IItem } from "../types/types";
 import { PlusIcon } from "../icons/PlusIcon";
 
@@ -29,7 +28,6 @@ function TaskItemAdder<T extends IItem>({
             className="w-full h-10 rounded-full border-0 outline-none p-4"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            placeholder={placeholder}
           />
           <button
             type="submit"

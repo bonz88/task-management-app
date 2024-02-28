@@ -10,9 +10,12 @@ import TaskSubtasks from "./TaskSubtasks";
 import TaskSubtasksList from "./TaskSubtasksList";
 import TaskTags from "./TaskTags";
 import TaskTagsList from "./TaskTagsList";
-import TaskItemAdder from "./TaskItemAdder"; // Adjust the path as necessary
-import TaskItemList from "./TaskItemList"; // Adjust the path as necessary
-import { useItems } from "../hooks/useItems"; // Custom hook for managing items
+import TaskItemAdder from "./TaskItemAdder";
+import TaskItemList from "./TaskItemList";
+import { useItems } from "../hooks/useItems";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { handleAddTask } from "../../redux/features/taskSlice";
 
 export default function TaskForm({ label }: { label: string }) {
   const [value, setValue] = useState<string>("");
@@ -35,6 +38,28 @@ export default function TaskForm({ label }: { label: string }) {
     deleteItem: deleteTag,
     editItem: editTag,
   } = useItems<ITag>();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleTaskSubmit = () => {
+    console.log("test save task");
+    if (!value.trim()) {
+      setTaskNameError("Task name is required.");
+      return;
+    }
+    setTaskNameError("");
+    dispatch(
+      handleAddTask({
+        value,
+        priority,
+        complexity,
+        dueDate,
+        dueTime,
+        subtasks,
+        tags,
+      })
+    );
+  };
 
   const handlePriority = (level: number) => {
     setPriority(level);
@@ -107,8 +132,8 @@ export default function TaskForm({ label }: { label: string }) {
     setTags(newTag);
   }; */
 
-  console.log("subtasks: ", subtasks);
-  console.log("tags: ", tags);
+  //console.log("subtasks: ", subtasks);
+  //console.log("tags: ", tags);
   return (
     <div className="mt-16 flex flex-col items-center">
       <div className="w-[358px]">
@@ -190,6 +215,14 @@ export default function TaskForm({ label }: { label: string }) {
               onEdit={editTag}
             />
           ))}
+        </div>
+        <div className="mt-4 flex justify-center">
+          <button
+            className="bg-blue-500 text-white rounded-full flex gap-2 my-6 py-4 px-8 border-none focus:outline-none focus:ring-0"
+            onClick={handleTaskSubmit}
+          >
+            Save task
+          </button>
         </div>
       </div>
     </div>
