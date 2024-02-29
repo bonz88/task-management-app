@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ISubtask, ITag } from "../../app/types/types";
 
 type ITask = {
+  id: string;
   value: string;
   priority: number;
   complexity: number;

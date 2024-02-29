@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import TaskInput from "./TaskInput";
 import TaskLevels from "./TaskLevels";
 import { BackIcon } from "../icons/BackIcon";
@@ -35,6 +36,8 @@ export default function TaskForm({ label }: { label: string }) {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const router = useRouter();
+
   const handleTaskSubmit = () => {
     if (!value.trim()) {
       setTaskNameError("Task name is required.");
@@ -43,6 +46,7 @@ export default function TaskForm({ label }: { label: string }) {
     setTaskNameError("");
     dispatch(
       handleAddTask({
+        id: Math.random().toString(),
         value,
         priority,
         complexity,
@@ -52,6 +56,7 @@ export default function TaskForm({ label }: { label: string }) {
         tags,
       })
     );
+    router.push("/");
   };
 
   const handlePriority = (level: number) => {
@@ -63,12 +68,10 @@ export default function TaskForm({ label }: { label: string }) {
   };
 
   const handleDueDate = (date: string) => {
-    console.log(date);
     setDueDate(date);
   };
 
   const handleDueTime = (time: string) => {
-    console.log(time);
     setDueTime(time);
   };
 
