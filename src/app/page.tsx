@@ -1,14 +1,30 @@
 "use client";
 
-import Image from "next/image";
 import { useAppSelector } from "../redux/store";
 
 export default function Home() {
-  const tasks = useAppSelector((state) => state.task);
-  console.log("tasks: ", tasks);
+  const tasks = useAppSelector((state) => state.task.tasks);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>{tasks.value}</h1>
+      {tasks.map((task) => (
+        <>
+          <h1>{task.value}</h1>
+          <h1>{task.priority}</h1>
+          <h1>{task.complexity}</h1>
+          <h1>{task.dueDate}</h1>
+          <h1>{task.dueTime}</h1>
+          {task.subtasks.map((subtask) => (
+            <>
+              <h1>{subtask.value}</h1>
+              <h1>Completed: {subtask.isCompleted}</h1>
+            </>
+          ))}
+          {task.tags.map((tag) => (
+            <h1>{tag.value}</h1>
+          ))}
+        </>
+      ))}
     </main>
   );
 }
