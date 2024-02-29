@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {tasks.map((task) => (
-        <div key={task.value}>
+        <div key={task.id}>
           <h1>{task.value}</h1>
           <h1>{task.priority}</h1>
           <h1>{task.complexity}</h1>
