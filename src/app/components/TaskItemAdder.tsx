@@ -21,7 +21,7 @@ function TaskItemAdder<T extends IItem>({
 
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-lg">{placeholder}</span>
+      <span className="text-sm sm:text-lg">{placeholder}</span>
       <div className="relative">
         <form onSubmit={handleSubmit}>
           <input

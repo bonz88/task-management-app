@@ -15,14 +15,14 @@ export default function TaskLevels({
 }: TaskLevelsProps) {
   return (
     <div className="flex flex-col">
-      <div className="mt-[30px]">
+      <div className="mt-4">
         <LevelSelector
           label="Select priority level"
           onLevelChange={(level) => handlePriority(level)}
           priority={priority}
         />
       </div>
-      <div className="mt-[30px]">
+      <div className="mt-4">
         <LevelSelector
           label="Select complexity level"
           onLevelChange={(level) => handleComplexity(level)}

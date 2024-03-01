@@ -76,23 +76,27 @@ export default function TaskForm({ label }: { label: string }) {
   };
 
   return (
-    <div className="mt-16 flex flex-col items-center">
-      <div className="w-[358px]">
-        <div className="flex items-center gap-[73px]">
+    <div className="mt-4 flex flex-col items-center">
+      <div className="w-[275px] sm:w-[358px]">
+        <div className="flex items-center gap-[43px] sm:gap-[73px]">
           <Link href="/">
             <button className="bg-white rounded-full p-1 border-none focus:outline-none focus:ring-0">
               <BackIcon />
             </button>
           </Link>
-          <span className="text-2xl font-medium leading-[29px]">{label}</span>
+          <span className="text-lg font-normal sm:text-2xl leading-[29px]">
+            {label}
+          </span>
         </div>
-        <div className="mt-[30px] flex flex-col gap-1">
+        <div className="mt-4 flex flex-col gap-1">
           <TaskInput onValueChange={(value) => setValue(value)} value={value} />
         </div>
-        <div className="mt-1">
-          {taskNameError && <div className="text-red-500">{taskNameError}</div>}
-        </div>
-        <div className="mt-1">
+
+        {taskNameError && (
+          <div className="mt-1 text-red-500">{taskNameError}</div>
+        )}
+
+        <div>
           <TaskLevels
             handlePriority={handlePriority}
             handleComplexity={handleComplexity}
@@ -100,7 +104,7 @@ export default function TaskForm({ label }: { label: string }) {
             complexity={complexity}
           />
         </div>
-        <div className="mt-[30px]">
+        <div className="mt-4">
           <TaskDueDateTime
             dueDate={dueDate}
             dueTime={dueTime}
@@ -108,7 +112,7 @@ export default function TaskForm({ label }: { label: string }) {
             handleDueTime={handleDueTime}
           />
         </div>
-        <div className="mt-[30px]">
+        <div className="mt-4">
           <TaskItemAdder onAdd={addSubtask} placeholder="Add new subtask" />
           {subtasks.map((subtask) => (
             <TaskItemList
@@ -120,7 +124,7 @@ export default function TaskForm({ label }: { label: string }) {
           ))}
         </div>
 
-        <div className="mt-[30px]">
+        <div className="mt-4">
           <TaskItemAdder onAdd={addTag} placeholder="Add new tag" />
           {tags.map((tag) => (
             <TaskItemList
@@ -131,9 +135,9 @@ export default function TaskForm({ label }: { label: string }) {
             />
           ))}
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-6 flex justify-center">
           <button
-            className="bg-blue-500 text-white rounded-full flex gap-2 my-6 py-4 px-8 border-none focus:outline-none focus:ring-0"
+            className="bg-blue-500 text-white rounded-full flex gap-2 py-4 px-8 border-none focus:outline-none focus:ring-0"
             onClick={handleTaskSubmit}
           >
             Save task

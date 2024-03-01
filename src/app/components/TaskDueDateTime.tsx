@@ -11,9 +11,9 @@ export default function TaskDueDateTime({
   handleDueTime,
 }: TaskDueDateTimeProps) {
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-2">
       <div className="w-1/2 flex flex-col gap-1">
-        <span className="text-lg">Select Due Date</span>
+        <span className="text-sm sm:text-lg">Select Due Date</span>
         <input
           className="h-10 rounded-full border-0 outline-none p-4"
           onChange={(e) => handleDueDate(e.target.value)}
@@ -22,7 +22,7 @@ export default function TaskDueDateTime({
         />
       </div>
       <div className="w-1/2 flex flex-col gap-1">
-        <span className="text-lg">Select Due Time</span>
+        <span className="text-sm sm:text-lg">Select Due Time</span>
         <input
           className="h-10 rounded-full border-0 outline-none p-4"
           onChange={(e) => handleDueTime(e.target.value)}

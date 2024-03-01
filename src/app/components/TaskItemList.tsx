@@ -20,7 +20,7 @@ function TaskItemList<T extends IItem>({
   };
 
   return (
-    <div className="relative rounded-full shadow-sm mt-1">
+    <div className="relative rounded-full shadow-sm mt-[10px]">
       <input
         className="w-full pl-4 pr-12 py-2 rounded-full focus:outline-none"
         onChange={(e) => setEditedValue(e.target.value)}
