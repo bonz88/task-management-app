@@ -4,6 +4,7 @@ import { ISubtask, ITag } from "../../app/types/types";
 type ITask = {
   id: string;
   value: string;
+  isCompleted: false;
   priority: number;
   complexity: number;
   dueDate: string;

@@ -48,6 +48,7 @@ export default function TaskForm({ label }: { label: string }) {
       handleAddTask({
         id: Math.random().toString(),
         value,
+        isCompleted: false,
         priority,
         complexity,
         dueDate,
