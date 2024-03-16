@@ -7,15 +7,16 @@ type PriorityComplexityDisplayProps = {
   complexity?: number;
 };
 
+const priorityComplexityDesc = (desc: number) => {
+  if (desc < 4) return "Low";
+  if (desc < 7) return "Medium";
+  return "High";
+};
+
 export default function PriorityComplexityDisplay({
   priority,
   complexity,
 }: PriorityComplexityDisplayProps) {
-  const priorityComplexityDesc = (desc: number) => {
-    if (desc < 4) return "Low";
-    if (desc < 7) return "Medium";
-    return "High";
-  };
   return (
     <div className="flex gap-2">
       {priority ? <PriorityIcon /> : <ComplexityIcon />}
